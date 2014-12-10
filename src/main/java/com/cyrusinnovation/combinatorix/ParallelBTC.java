@@ -55,7 +55,7 @@ public class ParallelBTC {
         }
     }
 
-
+    //dls - depth limited search
     private void targetedDLS(int limit){
         IntStream.rangeClosed(limit-1, n-1)
                 .parallel()

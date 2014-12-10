@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Benchmarks {
 
+
     @Test
     public void timeLocal() {
         int n = 22;
