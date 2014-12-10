@@ -1,4 +1,4 @@
-package com.cyrusinnovation.vader;
+package com.cyrusinnovation.combinatorix;
 
 import org.apache.commons.math3.util.CombinatoricsUtils;
 
@@ -22,7 +22,7 @@ public class BinomialTreeCombinations {
     }
 
     public Set<List<Integer>> getKIndices(int k){
-        return dls(k);
+        return targetedDLS(k);
     }
 
     public Set<List<Integer>> getAllPaths(){
@@ -48,13 +48,11 @@ public class BinomialTreeCombinations {
     private Set<List<Integer>> dfs(BTree node){
         Set<List<Integer>> results = new HashSet<>();
         List<Integer> path = new ArrayList<>();
-        Set<BTree> visited = new HashSet<>();
-        dfs(node, path, results, visited);
+        dfs(node, path, results);
         return results;
     }
 
-    private void  dfs(BTree node, List<Integer> path, Set<List<Integer>> results, Set<BTree> visited){
-        visited.add(node);
+    private void  dfs(BTree node, List<Integer> path, Set<List<Integer>> results){
         if (node.children.isEmpty()) {
             results.add(path);
             return;
@@ -63,20 +61,22 @@ public class BinomialTreeCombinations {
             BTree child = node.children.get(i);
             ArrayList<Integer> pathC = new ArrayList<>(path);
             pathC.add(i);
-            dfs(child, pathC, results, visited);
+            dfs(child, pathC, results);
         }
     }
 
-    private Set<List<Integer>> dls(int limit){
+    private Set<List<Integer>> targetedDLS(int limit){
         Set<List<Integer>> results = new HashSet<>();
-        List<Integer> path = new ArrayList<>();
-        Set<BTree> visited = new HashSet<>();
-        dls(root, path, results, visited, limit);
+        for (int i = n-1; i >= limit - 1; i--){
+            BTree node = root.children.get(i);
+            List<Integer> path = new ArrayList<>();
+            path.add(i);
+            targetedDLS(node, path, results, limit-1);
+        }
         return results;
     }
 
-    private void  dls(BTree node, List<Integer> path, Set<List<Integer>> results, Set<BTree> visited, int limit){
-        visited.add(node);
+    private void targetedDLS(BTree node, List<Integer> path, Set<List<Integer>> results, int limit){
         if (limit == 0) {
             results.add(path);
             return;
@@ -85,7 +85,27 @@ public class BinomialTreeCombinations {
             BTree child = node.children.get(i);
             ArrayList<Integer> pathC = new ArrayList<>(path);
             pathC.add(0,i);
-            dls(child, pathC, results, visited, limit - 1);
+            targetedDLS(child, pathC, results, limit - 1);
+        }
+    }
+
+    private Set<List<Integer>> dls(int limit){
+        Set<List<Integer>> results = new HashSet<>();
+        List<Integer> path = new ArrayList<>();
+        dls(root, path, results, limit);
+        return results;
+    }
+
+    private void  dls(BTree node, List<Integer> path, Set<List<Integer>> results, int limit){
+        if (limit == 0) {
+            results.add(path);
+            return;
+        }
+        for (Integer i : node.children.keySet()) {
+            BTree child = node.children.get(i);
+            ArrayList<Integer> pathC = new ArrayList<>(path);
+            pathC.add(0,i);
+            dls(child, pathC, results, limit - 1);
         }
     }
 

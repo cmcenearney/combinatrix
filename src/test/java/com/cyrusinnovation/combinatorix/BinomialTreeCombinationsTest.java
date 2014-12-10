@@ -1,4 +1,4 @@
-package com.cyrusinnovation.vader;
+package com.cyrusinnovation.combinatorix;
 
 import org.apache.commons.math3.util.Combinations;
 import org.junit.Test;
@@ -21,6 +21,12 @@ public class BinomialTreeCombinationsTest {
         return IntStream.range(0, r.length).boxed()
                 .map(i -> r[i])
                 .collect(Collectors.toList());
+    }
+
+    @Test
+    public void testNKPerms(){
+        assert(10 == BinomialTreeCombinations.nkPerms(5,3));
+        assert(495 == BinomialTreeCombinations.nkPerms(12,4));
     }
 
     @Test
@@ -64,7 +70,7 @@ public class BinomialTreeCombinationsTest {
     public void testK3N72(){
         BinomialTreeCombinations c = new BinomialTreeCombinations(172);
         Set<List<Integer>> combos = c.getKIndices(3);
-        System.out.println(combos.size());
+        assert(833340 == combos.size());
     }
 
     @Test
@@ -82,7 +88,7 @@ public class BinomialTreeCombinationsTest {
     @Test
     public void timeLocal(){
         int n = 12;
-        int k = 3;
+        int k = 7;
         System.out.println("n = " + n + ", k = " + k);
 
         long start = System.nanoTime();
@@ -93,15 +99,15 @@ public class BinomialTreeCombinationsTest {
         }
         long stop = System.nanoTime();
         long time = stop-start;
-        System.out.println("acm version: " + time);
+        System.out.println("acm version: " + time + ", size: " + apache.size());
 
         start = System.nanoTime();
         BinomialTreeCombinations c = new BinomialTreeCombinations(n);
         Set<List<Integer>> combos = c.getKIndices(k);
         stop = System.nanoTime();
         time = stop-start;
-        System.out.println("our version: " + time);
-
+        System.out.println("our version: " + time + ", size: " + combos.size());
+        assert(apache.size() == combos.size());
 //        start = System.nanoTime();
 //        Iterator<int[]> a = new Combinations(n,k).iterator();
 //        Set<int[]> apache = new HashSet<>();
@@ -117,5 +123,10 @@ public class BinomialTreeCombinationsTest {
 //    public void testArray(){
 //        int[] t = new int[5];
 //        System.out.print(t[4]);
+//    }
+
+//    @Test
+//    public void testInTRange(){
+//        IntStream.rangeClosed(1,12).map(i -> 1-i + 12).forEach(i -> System.out.println(i));
 //    }
 }
