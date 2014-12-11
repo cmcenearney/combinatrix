@@ -29,8 +29,8 @@ public class BinomialTreeCombinations {
         return dfs(root);
     }
 
-    public static long nkPerms(int n,int k){
-        return CombinatoricsUtils.factorial(n) / (CombinatoricsUtils.factorial(k) * CombinatoricsUtils.factorial(n-k));
+    public static double nkCombosCount(int n,int k){
+        return CombinatoricsUtils.binomialCoefficientDouble(n,k);
     }
 
     private void add(int n){

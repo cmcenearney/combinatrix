@@ -11,8 +11,8 @@ public class BinomialTreeCombinationsTest extends TestHelper{
 
     @Test
     public void testNKPerms(){
-        assert(10 == BinomialTreeCombinations.nkPerms(5,3));
-        assert(495 == BinomialTreeCombinations.nkPerms(12,4));
+        assert(10 == BinomialTreeCombinations.nkCombosCount(5,3));
+        assert(495 == BinomialTreeCombinations.nkCombosCount(12,4));
     }
 
     @Test
