@@ -1,4 +1,4 @@
-package com.cyrusinnovation.combinatorix;
+package com.cyrusinnovation.combinatrix;
 
 import org.apache.commons.math3.util.CombinatoricsUtils;
 

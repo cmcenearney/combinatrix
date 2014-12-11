@@ -5,4 +5,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'combinatorix'
+rootProject.name = 'combinatrix'

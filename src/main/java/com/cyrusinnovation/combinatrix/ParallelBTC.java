@@ -1,4 +1,4 @@
-package com.cyrusinnovation.combinatorix;
+package com.cyrusinnovation.combinatrix;
 
 import java.util.ArrayList;
 import java.util.List;

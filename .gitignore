@@ -1,3 +1,9 @@
+# Gradle Files #
+################
+gradle/
+*.gradle
+*.m2
+
 # OS generated files #
 ######################
 .DS_Store*

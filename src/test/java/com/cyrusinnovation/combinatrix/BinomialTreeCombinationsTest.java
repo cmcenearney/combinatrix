@@ -1,27 +1,14 @@
-package com.cyrusinnovation.combinatorix;
+package com.cyrusinnovation.combinatrix;
 
 import org.apache.commons.math3.util.Combinations;
+import org.apache.commons.math3.util.CombinatoricsUtils;
 import org.junit.Test;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static org.junit.Assert.assertEquals;
 
-public class BinomialTreeCombinationsTest {
-
-    public int[] listToArray(List<Integer> l){
-        int[] r = new int[l.size()];
-        IntStream.range(0, l.size() - 1).forEach(i -> r[i] = l.get(i));
-        return r;
-    }
-
-    public List<Integer> arrayToList(int[] r){
-        return IntStream.range(0, r.length).boxed()
-                .map(i -> r[i])
-                .collect(Collectors.toList());
-    }
+public class BinomialTreeCombinationsTest extends TestHelper{
 
     @Test
     public void testNKPerms(){
@@ -99,14 +86,14 @@ public class BinomialTreeCombinationsTest {
         }
         long stop = System.nanoTime();
         long time = stop-start;
-        System.out.println("acm version: " + time + ", size: " + apache.size());
+        System.out.println("iter version: " + time + ", size: " + apache.size());
 
         start = System.nanoTime();
         BinomialTreeCombinations c = new BinomialTreeCombinations(n);
         Set<List<Integer>> combos = c.getKIndices(k);
         stop = System.nanoTime();
         time = stop-start;
-        System.out.println("our version: " + time + ", size: " + combos.size());
+        System.out.println("tree version: " + time + ", size: " + combos.size());
         assert(apache.size() == combos.size());
 //        start = System.nanoTime();
 //        Iterator<int[]> a = new Combinations(n,k).iterator();
@@ -129,4 +116,9 @@ public class BinomialTreeCombinationsTest {
 //    public void testInTRange(){
 //        IntStream.rangeClosed(1,12).map(i -> 1-i + 12).forEach(i -> System.out.println(i));
 //    }
+
+    @Test
+    public void nkNumbers(){
+        p(CombinatoricsUtils.binomialCoefficientDouble(400,20));
+    }
 }

@@ -1,15 +1,13 @@
-package com.cyrusinnovation.combinatorix;
+package com.cyrusinnovation.combinatrix;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static org.junit.Assert.assertEquals;
 
-public class ParallelBTCTest {
+public class ParallelBTCTest extends TestHelper {
 
     @Test
     public void testK3N72(){
@@ -19,7 +17,14 @@ public class ParallelBTCTest {
         assert(59640 == combos.size());
     }
 
-
+    @Test
+    public void testN1000(){
+        ParallelBTC c = new ParallelBTC(1000,3);
+        ConcurrentLinkedQueue<ArrayList<Integer>> kInds = c.getKIndices();
+        //Set<List<Integer>> combos = c.getKIndicesAsSet();
+        //System.out.println(combos.size());
+        //assert(59640 == combos.size());
+    }
 
     @Test
     public void testK3N5() {
