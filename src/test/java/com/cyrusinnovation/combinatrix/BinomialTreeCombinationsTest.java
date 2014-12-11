@@ -1,7 +1,6 @@
 package com.cyrusinnovation.combinatrix;
 
 import org.apache.commons.math3.util.Combinations;
-import org.apache.commons.math3.util.CombinatoricsUtils;
 import org.junit.Test;
 
 import java.util.*;
@@ -73,52 +72,29 @@ public class BinomialTreeCombinationsTest extends TestHelper{
     }
 
     @Test
-    public void timeLocal(){
+    public void timeLocal() {
         int n = 12;
         int k = 7;
         System.out.println("n = " + n + ", k = " + k);
 
         long start = System.nanoTime();
-        Iterator<int[]> a = new Combinations(n,k).iterator();
+        Iterator<int[]> a = new Combinations(n, k).iterator();
         Set<int[]> apache = new HashSet<>();
-        while (a.hasNext()){
+        while (a.hasNext()) {
             apache.add(a.next());
         }
         long stop = System.nanoTime();
-        long time = stop-start;
+        long time = stop - start;
         System.out.println("iter version: " + time + ", size: " + apache.size());
 
         start = System.nanoTime();
         BinomialTreeCombinations c = new BinomialTreeCombinations(n);
         Set<List<Integer>> combos = c.getKIndices(k);
         stop = System.nanoTime();
-        time = stop-start;
+        time = stop - start;
         System.out.println("tree version: " + time + ", size: " + combos.size());
-        assert(apache.size() == combos.size());
-//        start = System.nanoTime();
-//        Iterator<int[]> a = new Combinations(n,k).iterator();
-//        Set<int[]> apache = new HashSet<>();
-//        while (a.hasNext()){
-//            apache.add(a.next());
-//        }
-//        stop = System.nanoTime();
-//        time = stop-start;
-//        System.out.println("acm version: " + time);
+        assert (apache.size() == combos.size());
     }
 
-//    @Test
-//    public void testArray(){
-//        int[] t = new int[5];
-//        System.out.print(t[4]);
-//    }
 
-//    @Test
-//    public void testInTRange(){
-//        IntStream.rangeClosed(1,12).map(i -> 1-i + 12).forEach(i -> System.out.println(i));
-//    }
-
-    @Test
-    public void nkNumbers(){
-        p(CombinatoricsUtils.binomialCoefficientDouble(400,20));
-    }
 }
