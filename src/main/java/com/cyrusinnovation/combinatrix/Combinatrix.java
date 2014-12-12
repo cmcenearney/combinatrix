@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Combinatrix<T> {
+
     private final int n;
     private final int k;
     private final List<T> list;
@@ -24,4 +25,9 @@ public class Combinatrix<T> {
                         .collect(Collectors.toList()))
                 .collect(Collectors.toSet());
     }
+
+    public Set<List<Integer>> safetyWord(){
+        return tree.getKIndices(k);
+    }
+
 }
